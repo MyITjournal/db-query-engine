@@ -29,7 +29,9 @@ app.get("/api/classify", async (req, res) => {
       timeout: 3500,
     });
 
-    const { gender, probability, count } = data;
+    const gender = data.gender;
+    const probability = data.probability;
+    const count = data.count;
 
     if (gender === null || count === 0) {
       return res.status(404).json({
