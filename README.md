@@ -10,7 +10,7 @@ This is a simple REST API that predicts the gender from a given name using the e
 - Express
 
 - **GitHub Repository:** `https://github.com/MyITjournal/gender-api-task`
-- **Live API Base URL:** `https://gender-api-task.vercel.app/api/classify`
+- **Live API Base URL:** `https://gender-api-task.vercel.app`
 
 ---
 

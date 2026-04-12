@@ -8,6 +8,10 @@ app.use((_req, res, next) => {
   next();
 });
 
+app.get("/", (_req, res) => {
+  res.json({ status: "OK", message: "Gender Classification API is running" });
+});
+
 app.get("/api/classify", async (req, res) => {
   const { name } = req.query;
 
