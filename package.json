@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,6 +17,7 @@
     "express": "^5.2.1",
     "express-validator": "^7.3.2",
     "pg": "^8.20.0",
+    "sequelize": "^6.37.8",
     "uuid": "^13.0.0"
   }
 }
