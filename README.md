@@ -9,8 +9,8 @@ This is a Simple REST API that accepts a name, queries three external prediction
 - Node.js + Express
 - PostgreSQL (`pg`)
 
-- **GitHub Repository:** `https://github.com/MyITjournal/hng14-task2`
-- **Live API Base URL:** `https://classifynames.vercel.app/`
+- **GitHub Repository:** `https://github.com/MyITjournal/name-class`
+- **Live API Base URL:** `https://name-class-myitjournal8137-wd59h7ad.leapcell.dev`
 
 ---
 
@@ -244,13 +244,4 @@ curl "http://localhost:3000/api/profiles?gender=female&age_group=adult"
 
 ---
 
-## Deployment (Vercel)
-
-Set the following environment variables in your Vercel project settings:
-
-| Variable       | Description                                         |
-| -------------- | --------------------------------------------------- |
-| `DATABASE_URL` | PostgreSQL connection string                        |
-| `DATABASE_SSL` | Set to `true` for hosted providers (Supabase, Neon) |
-
-Live URL: `https://classifynames.vercel.app`
+Live URL: `https://name-class-myitjournal8137-wd59h7ad.leapcell.dev`
