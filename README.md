@@ -6,7 +6,7 @@
 
 This is a read-only REST API that serves a pre-seeded database of name profiles. Each profile contains predicted gender, age, and nationality data. The API supports filtering, sorting, pagination, and a natural language query interface for the profiles endpoint.
 
-- **GitHub Repository:** `https://github.com/MyITjournal/name-class`
+- **GitHub Repository:** `https://github.com/MyITjournal/db-query-engine`
 - **Live API Base URL:** `https://name-class-myitjournal8137-wd59h7ad.leapcell.dev`
 
 ---
@@ -324,8 +324,8 @@ All error responses follow the same structure:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/MyITjournal/name-class.git
-cd name-class
+git clone https://github.com/MyITjournal/db-query-engine.git
+cd your-folder-name
 
 # 2. Install dependencies
 npm install
