@@ -101,7 +101,6 @@ router.get("/", profilesListRules, handleValidationErrors, async (req, res) => {
       page,
       limit,
       total,
-      total_pages: Math.ceil(total / limit),
       data: rows.map(formatProfile),
     });
   } catch (error) {
@@ -132,7 +131,7 @@ router.get("/search", searchRules, handleValidationErrors, async (req, res) => {
 
   if (parsed.gender) {
     values.push(parsed.gender);
-    conditions.push(`gender = $${values.length}`);
+    conditions.push(`LOWER(gender) = $${values.length}`);
   }
 
   if (parsed.age_group) {
@@ -192,7 +191,6 @@ router.get("/search", searchRules, handleValidationErrors, async (req, res) => {
       page,
       limit,
       total,
-      total_pages: Math.ceil(total / limit),
       data: rows.map(formatProfile),
     });
   } catch (error) {

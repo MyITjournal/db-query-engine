@@ -21,6 +21,7 @@ Object.assign(COUNTRY_MAP, {
   "republic of congo": "CG",
   swaziland: "SZ",
   "the gambia": "GM",
+  "republic of kenya": "KE",
 });
 
 const COUNTRY_ENTRIES = Object.entries(COUNTRY_MAP).sort(
@@ -62,19 +63,15 @@ const TEEN_WORDS = new Set([
 const ADULT_WORDS = new Set(["adult", "adults"]);
 const SENIOR_WORDS = new Set(["senior", "seniors", "elderly", "old", "older"]);
 
-function normalizeGender(word) {
-  if (MALE_WORDS.has(word)) return "male";
-  if (FEMALE_WORDS.has(word)) return "female";
-  return null;
-}
-
 export function parseNaturalLanguageQuery(query) {
   const text = query.toLowerCase().trim();
   const words = text.split(/\s+/);
   const parsedFilters = {};
 
-  const detectedGenders = new Set(words.map(normalizeGender).filter(Boolean));
-  if (detectedGenders.size === 1) parsedFilters.gender = [...detectedGenders][0];
+  const hasMale = words.some((word) => MALE_WORDS.has(word));
+  const hasFemale = words.some((word) => FEMALE_WORDS.has(word));
+  if (hasMale && !hasFemale) parsedFilters.gender = "male";
+  else if (hasFemale && !hasMale) parsedFilters.gender = "female";
 
   if (words.includes("young")) {
     parsedFilters.min_age = 16;
