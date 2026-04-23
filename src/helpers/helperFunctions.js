@@ -6,16 +6,21 @@ export function determineAgeGroup(age) {
   return "senior";
 }
 
+export function getCountryName(countryCode) {
+  if (!countryCode) return null;
+  return countries[countryCode]?.name ?? countryCode;
+}
+
 export function formatProfile(r) {
   return {
     id: r.id,
     name: r.name,
     gender: r.gender,
     gender_probability: parseFloat(r.gender_probability),
-    sample_size: r.sample_size,
     age: r.age,
     age_group: r.age_group,
     country_id: r.country_id,
+    country_name: r.country_name ?? null,
     country_probability: parseFloat(
       parseFloat(r.country_probability).toFixed(2),
     ),
@@ -29,8 +34,8 @@ export function handleUpstreamError(res, error) {
     (error.response && error.response.status >= 500);
   return res.status(isUpstream ? 502 : 500).json({
     status: "error",
-    message: isUpstream
-      ? "Failed to reach an external prediction service"
-      : "Internal server error",
+    message: "Server failure",
   });
 }
+
+

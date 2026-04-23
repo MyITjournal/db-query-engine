@@ -1,5 +1,5 @@
 import express from "express";
-import classifyRouter from "./routes/classify.js";
+import classifyRouter from "./routes/_classify.js";
 import profilesRouter from "./routes/profiles.js";
 
 const app = express();
@@ -17,5 +17,9 @@ app.get("/", (_req, res) => {
 
 app.use("/api/classify", classifyRouter);
 app.use("/api/profiles", profilesRouter);
+
+app.use((_req, res) => {
+  res.status(404).json({ status: "error", message: "Profile not found" });
+});
 
 export default app;

@@ -28,7 +28,7 @@ router.get(
       if (gender === null || count === 0) {
         return res.status(404).json({
           status: "error",
-          message: "No prediction available for the provided name",
+          message: "Profile not found",
         });
       }
 

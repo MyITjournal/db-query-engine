@@ -1,5 +1,6 @@
 import { Sequelize, DataTypes } from "sequelize";
 import config from "../config/index.js";
+import { seedProfiles } from "./seed.js";
 
 const sequelize = new Sequelize(config.DATABASE_URL, {
   dialect: "postgres",
@@ -13,24 +14,25 @@ sequelize.define(
   "db_profile",
   {
     id: { type: DataTypes.UUID, primaryKey: true },
-    name: { type: DataTypes.STRING(255), allowNull: false },
+    name: { type: DataTypes.STRING(255), allowNull: false, unique: true },
     gender: DataTypes.STRING(20),
-    gender_probability: DataTypes.DECIMAL(5, 4),
-    sample_size: DataTypes.INTEGER,
+    gender_probability: DataTypes.FLOAT,
     age: DataTypes.INTEGER,
     age_group: DataTypes.STRING(20),
-    age_sample_size: DataTypes.INTEGER,
     country_id: DataTypes.CHAR(2),
-    country_probability: DataTypes.DECIMAL(5, 4),
+    country_name: DataTypes.STRING(100),
+    country_probability: DataTypes.FLOAT,
     created_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
   },
   {
     tableName: "db_profiles",
     timestamps: false,
     indexes: [
+      { unique: true, fields: ["name"], name: "db_profiles_name_unique_idx" },
       { fields: ["gender"], name: "db_profiles_gender_idx" },
       { fields: ["age_group"], name: "db_profiles_age_group_idx" },
       { fields: ["country_id"], name: "db_profiles_country_id_idx" },
+      { fields: ["age"], name: "db_profiles_age_idx" },
     ],
   },
 );
@@ -45,9 +47,11 @@ export const connectDB = async () => {
   }
 
   try {
-    await sequelize.sync();
+    await sequelize.sync({ force: true });
+    await seedProfiles();
   } catch (error) {
-    console.warn("Schema sync warning (non-fatal):", error.message);
+    console.error("Database sync/seed error:", error.message);
+    process.exit(1);
   }
 };
 
