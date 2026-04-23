@@ -113,7 +113,11 @@ export function parseNaturalLanguageQuery(query) {
   }
 
   for (const [name, code] of COUNTRY_ENTRIES) {
-    if (text.includes(name)) {
+    const nameWords = name.split(" ");
+    const found = words.some((_, i) =>
+      nameWords.every((w, j) => words[i + j] === w),
+    );
+    if (found) {
       parsedFilters.country_id = code;
       break;
     }
