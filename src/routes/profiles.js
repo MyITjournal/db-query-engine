@@ -28,8 +28,8 @@ router.get("/", profilesListRules, handleValidationErrors, async (req, res) => {
   } = req.query;
   const sort_by = req.query.sort_by ?? "created_at";
   const order = (req.query.order ?? "desc").toUpperCase();
-  const page = req.query.page ?? 1;
-  const limit = req.query.limit ?? 10;
+  const page = parseInt(req.query.page ?? 1, 10);
+  const limit = Math.min(parseInt(req.query.limit ?? 10, 10), 50);
   const offset = (page - 1) * limit;
 
   const sortCol = ALLOWED_SORT_FIELDS[sort_by] ?? "created_at";
@@ -101,6 +101,7 @@ router.get("/", profilesListRules, handleValidationErrors, async (req, res) => {
       page,
       limit,
       total,
+      total_pages: Math.ceil(total / limit),
       data: rows.map(formatProfile),
     });
   } catch (error) {
@@ -113,8 +114,8 @@ router.get("/", profilesListRules, handleValidationErrors, async (req, res) => {
 // GET /api/profiles/search — natural language search
 router.get("/search", searchRules, handleValidationErrors, async (req, res) => {
   const q = req.query.q;
-  const page = req.query.page ?? 1;
-  const limit = req.query.limit ?? 10;
+  const page = parseInt(req.query.page ?? 1, 10);
+  const limit = Math.min(parseInt(req.query.limit ?? 10, 10), 100);
   const offset = (page - 1) * limit;
 
   const parsed = parseNaturalLanguageQuery(q);
@@ -191,6 +192,7 @@ router.get("/search", searchRules, handleValidationErrors, async (req, res) => {
       page,
       limit,
       total,
+      total_pages: Math.ceil(total / limit),
       data: rows.map(formatProfile),
     });
   } catch (error) {

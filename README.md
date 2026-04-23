@@ -7,7 +7,7 @@
 This is a read-only REST API that serves a pre-seeded database of name profiles. Each profile contains predicted gender, age, and nationality data. The API supports filtering, sorting, pagination, and a natural language query interface for the profiles endpoint.
 
 - **GitHub Repository:** `https://github.com/MyITjournal/db-query-engine`
-- **Live API Base URL:** `https://name-class-myitjournal8137-wd59h7ad.leapcell.dev`
+- **Live API Base URL:** `https://db-query-engine-myitjournal8137-upfultli.leapcell.dev`
 
 ---
 
@@ -367,4 +367,4 @@ curl "http://localhost:3000/api/profiles/search?q=men+in+their+30s+from+the+UK"
 
 ---
 
-Live URL: `https://name-class-myitjournal8137-wd59h7ad.leapcell.dev`
+Live URL: `https://db-query-engine-myitjournal8137-upfultli.leapcell.dev`
